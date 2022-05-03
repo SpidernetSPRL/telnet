@@ -3,15 +3,19 @@ A simple telnet-like operations through a web page
 
 <b>Rationale</b>
 
-I can remember a time where ones could access any server (for instance some cheap web server space you'd rent) with simple tools such as FTP and Telnet. This time is slowly getting over; With the advent of cPanel, Git, Docker and the likes, accessing a simple server to test a development or implement a quick fix is becoming an increasingly complex task, requiring specialised tools, RSA keys and so on.
+I can remember a time where ones could access any server with simple tools such as FTP and Telnet. This time is slowly getting over; with the advent of cPanel, Git, Docker and the likes, accessing a simple server to test a development or implement a quick fix is becoming an increasingly complex task, requiring specialised tools, RSA keys and so on.
+
+The elimination of FTP and Telnet is often justified by security concerns (which indeed is true: they are vulnerable to a "man in between" kind of attack), but this can easily be fixed using SFTP and SSH.
+
+Sure enough a docker virtual machine can include an (s)FTP and Telnet/SSH server, but in many circumstances the sysadmin/owner will be reluctant to install these because the changes made through those tools would be lost if the docker reboots. It clearly is true, requires from the user a bit of discipline, but nevertheless is a source of discomfort for the developper.
 
 At the "low" end, "managers" such as cPanel which are supposed to help even an end user to run a server (which is a sane ambition, I presume) usually miss one random crucial feature that makes them useless for the problem you want to solve. This "missing feature" vary from implementation to implementation. Something like "<i>you can upload a zip file... to discover there is no unzip</i>" or whatever. The thing is that by adding an interface layer between you and the server, they block the ability to fiddle to find a solution.
 
-At the "high" end, tools such as Git and Docker are great for what they have been designed to address: teams of corporate workers sharing code that go over hundreds of thousands lines, cluster of cloud servers and so on, but let's be honnest, in my everyday life I am most often dealing with small projects that are a few thousands lines, that wouldn't make sense sharing and which are running on a simple webserver.
+At the "high" end, tools such as Git and Docker are great for what they have been designed to address: teams of workers collaborating on multi hundreds of thousands line code, sharing, cluster of cloud servers and so on, but let's be honnest, in my everyday life I am most often dealing with small projects that are a few thousands lines, that wouldn't make sense sharing and which are running on a simple webserver.
 
 For those easy projects, the day to day use of sophisticated tools can be a hassle: you edit your code locally, commit it with Git, which is replicated to the Docker server, you test the modification realise it isn't working as expected and you're going around for a new cycle. Depending on how complex your infrastructure is (dev servers, production servers, docker needing to be reinstanciated with your new code,...), this easily can takes minutes and make interactive testing (for instance running a command to see the result) uneasy.
 
-Comparatively, a telnet or an FTP client allows you to log to the server, change the file right away and test the result. It won't do versionning, nor help you migrate your code to another server or share it on social media, nor does it look very nice or be friendly to use for the novice but you can run a test cycle in something like 5 seconds, allowing to develop or fix a code almost interactively, try executing the program and get the error message right away and so on.
+Comparatively, a telnet or an FTP client allows you to log to the server, change the file right away and test the result. It won't do versionning, nor help you migrate your code to another server, nor look very nice or easy to use for the novice but you can run a test cycle in something like 5 seconds, allowing to develop or fix a code almost interactively, try executing the program and get the error message right away and so on.
 
 Another inconvenience is that those complex tools requires to be installed on the machine you use.
 
@@ -32,7 +36,7 @@ What we need ? A simple way to perform simple tasks, for instance:
     - compile a small c script,
     - tail a log file,
     - etc 
-    
+
 In a word the kind of simple operations you would do during an urgent fix, to hunt a bug or to test a modification. There isn't, say, a real need for bash scripting or whatever. Single commands fill most of the use cases.
 
 And yes: if it still can help you compare versions or transfer a project from server to server... why not, but this isn't the main mission.
@@ -43,7 +47,7 @@ The use of the application shouldn't leave traces on the client machine (install
 
 This means in both cases (server and client machines) that it may prove difficult (in term of allowed system rights and "pollution" of the client machine) to install custom software. Should you have those rights, it's of no use to have a "simple" solution requiring you a lengthy installation procedure.
 
-Let's face it: a web based application is likely the best option, hence this project.
+Let's face it: a web based application is likely the best option.
 
 In many cases, you will want to access a distant server because you're on a web project, or use a mutualised server that likely already runs a web server.
 
